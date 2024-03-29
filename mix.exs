@@ -32,6 +32,7 @@ defmodule FoodTruckRoulette.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:nimble_csv, "~> 1.2"},
       {:phoenix, "~> 1.7.11"},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
