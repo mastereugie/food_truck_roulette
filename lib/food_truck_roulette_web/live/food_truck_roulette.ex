@@ -1,5 +1,9 @@
 defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
   use FoodTruckRouletteWeb, :live_view
+
+  # Use Agent for food truck data memoization
+  use Agent
+
   alias NimbleCSV.RFC4180, as: CSV
 
   # on mount - load a list of food trucks
@@ -17,6 +21,24 @@ defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
         |> Map.new(fn {val, num} -> {column_names[num], val} end)
       end)
 
+    set_food_trucks(food_trucks)
+
+    food_truck = generate_random_food_truck()
+
+    {:ok, assign(socket, food_truck: food_truck)}
+  end
+
+  def handle_event("randomize", _, socket) do
+    food_truck = generate_random_food_truck()
+
+    socket = assign(socket, food_truck: food_truck)
+    {:noreply, socket}
+  end
+
+  # Generates random food truck data
+  defp generate_random_food_truck() do
+    food_trucks = get_food_trucks()
+
     trucks_qty = length(food_trucks)
 
     # Generate random number from 0 to last index of food_trucks
@@ -24,8 +46,6 @@ defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
 
     # Get random food_truck
     food_truck = Enum.at(food_trucks, random_truck_idx);
-
-    {:ok, assign(socket, food_truck: food_truck)}
   end
 
   # Parse column names from a CSV file
@@ -36,5 +56,14 @@ defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
     |> Enum.fetch!(0)
     |> Enum.with_index()
     |> Map.new(fn {val, num} -> {num, val} end)
+  end
+
+  # Store imported food truck data
+  def set_food_trucks(initial_value) do
+    Agent.start_link(fn -> initial_value end, name: __MODULE__)
+  end
+
+  def get_food_trucks do
+    Agent.get(__MODULE__, & &1)
   end
 end
