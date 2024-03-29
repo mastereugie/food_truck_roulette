@@ -1,22 +1,30 @@
 <div class="flex flex-col max-w-lg mx-auto text-center">
     <p>Randomly select your lunch destination for today!</p>
 
-    <div class="flex mt-4 text-left">
-        <div class="w-1/2 bg-gray-100 p-4 rounded-l">
-            <h1><%= @food_truck["Applicant"] %></h1>
-            
-            <h2>Address</h2>
-            <p><%= @food_truck["Address"] %></p>
+    <%= if assigns[:food_truck] do %>
+        <div class="flex mt-4 text-left">
+            <div class="w-1/2 bg-gray-100 p-4 rounded-l">
+                <h1><%= @food_truck["Applicant"] %></h1>
+                
+                <h2>Address</h2>
+                <p><%= @food_truck["Address"] %></p>
 
-            <h2>Location description</h2>
-            <p><%= @food_truck["LocationDescription"] %></p>
+                <h2>Location description</h2>
+                <p><%= @food_truck["LocationDescription"] %></p>
+            </div>
+            <div class="w-1/2 bg-gray-200 p-4 rounded-r">
+                <h2>What's on the menu</h2>
+                <p><%= @food_truck["FoodItems"] %></p>
+            </div>
         </div>
-        <div class="w-1/2 bg-gray-200 p-4 rounded-r">
-            <h2>What's on the menu</h2>
-            <p><%= @food_truck["FoodItems"] %></p>
-        </div>
-    </div>
+    <% end %>
     <p class="mt-10">
-        <button class="inline-block w-20 h-20 text-center border rounded bg-green-300" phx-click="randomize">Get another!</button>
+        <button class="inline-block w-20 h-20 text-center border rounded bg-green-300" phx-click="randomize">
+            <%= if assigns[:food_truck] do %>
+                Get another!
+            <% else %>
+                Get my lunch!
+            <% end %>
+        </button>
     </p>
 </div>

@@ -8,7 +8,7 @@ defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
 
   # on mount - load a list of food trucks
   def mount(_params, _session, socket) do
-    file = "priv/data/Mobile_Food_Facility_Permit-shortlist.csv"
+    file = "priv/data/Mobile_Food_Facility_Permit.csv"
 
     column_names = parse_column_names(file)
 
@@ -23,9 +23,7 @@ defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
 
     set_food_trucks(food_trucks)
 
-    food_truck = generate_random_food_truck()
-
-    {:ok, assign(socket, food_truck: food_truck)}
+    {:ok, socket}
   end
 
   def handle_event("randomize", _, socket) do
@@ -45,7 +43,7 @@ defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
     random_truck_idx = Enum.random(0..trucks_qty - 1)
 
     # Get random food_truck
-    food_truck = Enum.at(food_trucks, random_truck_idx);
+    Enum.at(food_trucks, random_truck_idx);
   end
 
   # Parse column names from a CSV file
