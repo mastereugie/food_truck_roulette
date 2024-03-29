@@ -17,9 +17,15 @@ defmodule FoodTruckRouletteWeb.FoodTruckRoulette do
         |> Map.new(fn {val, num} -> {column_names[num], val} end)
       end)
 
-    IO.inspect(food_trucks)
+    trucks_qty = length(food_trucks)
 
-    {:ok, assign(socket, food_trucks: food_trucks)}
+    # Generate random number from 0 to last index of food_trucks
+    random_truck_idx = Enum.random(0..trucks_qty - 1)
+
+    # Get random food_truck
+    food_truck = Enum.at(food_trucks, random_truck_idx);
+
+    {:ok, assign(socket, food_truck: food_truck)}
   end
 
   # Parse column names from a CSV file

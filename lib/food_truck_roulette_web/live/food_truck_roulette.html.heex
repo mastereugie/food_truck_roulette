@@ -3,17 +3,17 @@
 
     <div class="flex mt-4 text-left">
         <div class="w-1/2 bg-gray-100 p-4 rounded-l">
-            <h1>Taqueria Lolita</h1>
+            <h1><%= @food_truck["Applicant"] %></h1>
             
             <h2>Address</h2>
-            <p>5 THE EMBARCADERO</p>
+            <p><%= @food_truck["Address"] %></p>
 
             <h2>Location description</h2>
-            <p>SANSOME ST: BUSH ST to PINE ST (100 - 199)</p>
+            <p><%= @food_truck["LocationDescription"] %></p>
         </div>
         <div class="w-1/2 bg-gray-200 p-4 rounded-r">
             <h2>What's on the menu</h2>
-            <p>Fruits including mangoes: pineapples: coconuts: watermelon: corn: cucumber: potatoes chips: water: Mexican drinks: sodas: juices: snow cones</p>
+            <p><%= @food_truck["FoodItems"] %></p>
         </div>
     </div>
     <p class="mt-10">
