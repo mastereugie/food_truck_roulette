@@ -9,7 +9,7 @@ Before installation make sure you have **Phoenix LiveView** v1.7.11 and **Elixir
 
  - `git clone this repo` 
  - `cd food_truck_roulette/`
- - `mix dep.get`
+ - `mix deps.get`
 
 ## Running dev server
 Running `mix phx.server` will start dev server on `http://localhost:4000/`
