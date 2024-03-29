@@ -12,7 +12,8 @@ config :food_truck_roulette,
 
 # Configures the endpoint
 config :food_truck_roulette, FoodTruckRouletteWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "localhost", port: 4001],
+  check_origin: :conn,
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: FoodTruckRouletteWeb.ErrorHTML, json: FoodTruckRouletteWeb.ErrorJSON],
